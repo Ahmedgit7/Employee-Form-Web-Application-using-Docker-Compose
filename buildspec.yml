@@ -21,6 +21,7 @@ phases:
       - cd app
       - npm run build
       - echo Building Docker image...
+      - docker login  -u ahmed7860 -p dckr_pat_ISn42m44lpAi28NMKfrczi0YSWI
       - docker build -t my-app:latest ./   # Assuming Dockerfile is in the root of 'app' directory
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region ap-south-1 | sudo docker login --username AWS --password-stdin 185633157927.dkr.ecr.ap-south-1.amazonaws.com
