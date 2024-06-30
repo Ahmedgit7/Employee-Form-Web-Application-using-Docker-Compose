@@ -21,20 +21,20 @@ phases:
       - cd app
       - npm run build
       - echo Building Docker image...
-      - docker login  -u ahmed7860 -p dckr_pat_ISn42m44lpAi28NMKfrczi0YSWI
+      - docker login  -u ahmed7860 -p {Add Password}
       - docker build -t my-app:latest ./   # Assuming Dockerfile is in the root of 'app' directory
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region ap-south-1 | sudo docker login --username AWS --password-stdin 185633157927.dkr.ecr.ap-south-1.amazonaws.com
+      - aws ecr get-login-password --region ap-south-1 | sudo docker login --username AWS --password-stdin {ACC_ID}.dkr.ecr.ap-south-1.amazonaws.com
       - echo Tagging Docker image...
-      - docker tag my-app:latest 185633157927.dkr.ecr.ap-south-1.amazonaws.com/employee-form:latest
+      - docker tag {ECR_REPO}
       - echo Pushing Docker image to ECR...
-      - docker push 185633157927.dkr.ecr.ap-south-1.amazonaws.com/employee-form:latest
+      - docker push {ECR_REPO}
 
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Writing image definitions file...
-      - printf '[{"name":"app","imageUri":"%s"}]' 185633157927.dkr.ecr.ap-south-1.amazonaws.com/my-app:latest > imagedefinitions.json
+      - printf '[{"name":"app","imageUri":"%s"}]' {ECR_REPO} > imagedefinitions.json
 
 artifacts:
   files: 
