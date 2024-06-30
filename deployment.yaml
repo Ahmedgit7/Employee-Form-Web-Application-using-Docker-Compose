@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: 185633157927.dkr.ecr.ap-south-1.amazonaws.com/employee-form:latest
+        image: ${ECR_REPO_URI}:${CODEBUILD_BUILD_NUMBER}
         ports:
         - containerPort: 3000
 ---
